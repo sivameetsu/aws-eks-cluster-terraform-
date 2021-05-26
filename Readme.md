@@ -3,7 +3,7 @@ aws eks terraform
     1. create the ec2 instance key
     2. aws access key
     3. aws secret key
-    
+    4. backend s3 bucket
 
 Resource provisiong command
 
