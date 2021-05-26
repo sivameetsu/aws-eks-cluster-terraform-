@@ -1,16 +1,16 @@
-name: deploy to terraform
-on: [push]
+name: provision the eks resources
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "target environment name"
+        required: true
 jobs:
   deploy_source:
     name: terraform deployment
-    strategy:
-      matrix:
-        folder: [s3-lambda-dynamodb]
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
-        working-directory: ${{ matrix.folder }}
+    env:
+      bucket: backend-bucket-name
     steps:
       - name: checkout
         uses: actions/checkout@v1
@@ -29,7 +29,11 @@ jobs:
 
       - name: terraform initial
         run: |
-          terraform init 
+          terraform init \
+            -backend-config="bucket=${{ env.bucket }}" \
+            -backend-config="key=${{ github.event.inputs.name }}/tfstate.tfstate" \
+            -backend-config="region=eu-central-1" \
+            -backend=true
 
       - name: terraform plan
         run: terraform  plan -var-file=config.tfvars
