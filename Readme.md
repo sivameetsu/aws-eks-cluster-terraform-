@@ -4,6 +4,11 @@ aws eks terraform
     2. aws access key
     3. aws secret key
     4. backend s3 bucket
+    5. iam users 
+
+
+![create the secret in GitHub](images/i.png)
+
 
 Resource provisiong command
 
