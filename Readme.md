@@ -7,7 +7,7 @@ aws eks terraform
     5. iam users 
 
 
-![create the secret in GitHub](images/i.png)
+![createSecret](images/i.png)
 
 
 Resource provisiong command
