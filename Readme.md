@@ -22,7 +22,24 @@
 
 ----------------
 
-Resource provisiong command
+# RESOURCE PROVISION DEPLOYMENT
+
+----------------
+
+![1](Images/D1.png)
+
+![2](Images/D2.png)
+
+![3](Images/D3.png)
+
+----------------
+
+
+
+
+
+
+
 
     terraform init
     terraform apply   -var-file=config.tfvars -auto-approve
