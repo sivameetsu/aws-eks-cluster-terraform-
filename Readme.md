@@ -7,7 +7,11 @@ aws eks terraform
     5. iam users 
 
 
-![createSecret](images/i.png)
+![1](images/1.png)
+
+![2](images/2.png)
+
+![3](images/3.png)
 
 
 Resource provisiong command
