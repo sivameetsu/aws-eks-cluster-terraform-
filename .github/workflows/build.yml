@@ -1,4 +1,4 @@
-name: provision the eks resources
+name: build push and deployment
 on:
   workflow_dispatch:
     inputs:
