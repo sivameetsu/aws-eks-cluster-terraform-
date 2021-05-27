@@ -46,6 +46,8 @@ jobs:
           aws eks --region eu-central-1 update-kubeconfig --name demo-dev
           curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
           chmod +x kubectl
+          ./kubectl delete -f kube-deployment/main.yml
+          sleep 5
           ./kubectl apply -f kube-deployment/main.yml
           sleep 60
           ./kubectl get po,svc
