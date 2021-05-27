@@ -1,11 +1,18 @@
 aws eks terraform 
 
+----------------
+
     1. create the ec2 instance key
     2. aws access key
     3. aws secret key
     4. backend s3 bucket
     5. iam users 
 
+----------------
+
+# PROCESS FLOWS
+
+----------------
 
 ![1](Images/1.png)
 
@@ -13,6 +20,7 @@ aws eks terraform
 
 ![3](Images/3.png)
 
+----------------
 
 Resource provisiong command
 
