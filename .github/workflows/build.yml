@@ -32,7 +32,7 @@ jobs:
         with:
           context: node-app/
           push: true
-          tags: jjino/node-app:v1
+          tags: jjino/node-app:v2
 
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1
