@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
   - name: lino-app
-    image: jjino/node-app
+    image: jjino/node-app:v1
     ports:
     - containerPort: 4000
 ---
