@@ -1,10 +1,5 @@
 name: build push and deployment
-on:
-  workflow_dispatch:
-    inputs:
-      name:
-        description: "target environment name"
-        required: true
+on: workflow_dispatch:
 jobs:
   deploy_source:
     name: app deployment
@@ -32,7 +27,7 @@ jobs:
         with:
           context: node-app/
           push: true
-          tags: jjino/node-app:v2
+          tags: jjino/node-app:${GITHUB_RUN_NUMBER}
 
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -50,13 +45,15 @@ jobs:
       - name: kubernetes deployment configuration
         run: aws eks --region eu-central-1 update-kubeconfig --name demo-dev
 
-      - name: build number
-        run: echo ${GITHUB_RUN_NUMBER}
-        
-      - name: kubernetes deployment configuration
+      - name: docker image configuration
         run: |
-          kubectl delete pod/demo-pod
-          sleep 5
-          kubectl apply -f kube-deployment/main.yml
-          sleep 60
-          kubectl get po,svc
+          tag=${GITHUB_RUN_NUMBER}
+          image=node-app:$tag
+          repositoryName=jjino
+          sed -i 's/containerImageName/'"$repositoryName\/$image"'/g' kube-deployment/main.yml
+
+      - name: kubernetes deployment configuration
+        run: kubectl apply -f kube-deployment/main.yml
+
+      - name: kubernetes get status
+        run: kubectl get po,svc
