@@ -1,5 +1,10 @@
 name: build push and deployment
-on: workflow_dispatch:
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "target environment name"
+        required: true
 jobs:
   deploy_source:
     name: app deployment
@@ -57,3 +62,4 @@ jobs:
 
       - name: kubernetes get status
         run: kubectl get po,svc
+
