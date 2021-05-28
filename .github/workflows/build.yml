@@ -41,12 +41,17 @@ jobs:
           aws-secret-access-key: ${{ secrets.SECRET_KEY }}
           aws-region: eu-central-1
 
+      - name: configure aws credentials
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x kubectl
+          mkdir bin
+          mv kubectl bin/
+          export PATH=$PATH:$HOME/bin  
+
       - name: kubernetes deployment configuration
         run: |
           aws eks --region eu-central-1 update-kubeconfig --name demo-dev
-          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-          chmod +x kubectl
-          mv kubectl /usr/bin/
           kubectl delete pod/demo-pod
           sleep 5
           kubectl apply -f kube-deployment/main.yml
