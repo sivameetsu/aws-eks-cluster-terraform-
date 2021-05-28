@@ -10,7 +10,7 @@ jobs:
     name: app deployment
     runs-on: ubuntu-latest
     env:
-      Ids: ${GITHUB_RUN_NUMBER}
+      CN: demo-dev
     steps:
       - name: checkout
         uses: actions/checkout@v1
@@ -48,7 +48,7 @@ jobs:
           export PATH=$PATH:$HOME/bin  
 
       - name: kubernetes credentials download
-        run: aws eks --region eu-central-1 update-kubeconfig --name demo-dev
+        run: aws eks --region eu-central-1 update-kubeconfig --name $CN
 
       - name: docker image configuration
         run: |
