@@ -51,7 +51,7 @@ jobs:
         run: aws eks --region eu-central-1 update-kubeconfig --name demo-dev
 
       - name: build number
-        run: echo ${{GITHUB_RUN_NUMBER}}
+        run: echo ${GITHUB_RUN_NUMBER}
         
       - name: kubernetes deployment configuration
         run: |
