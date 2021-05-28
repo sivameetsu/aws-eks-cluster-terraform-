@@ -10,7 +10,7 @@ jobs:
     name: app deployment
     runs-on: ubuntu-latest
     env:
-      bucket: backend-bucket-name
+      Ids: ${GITHUB_RUN_NUMBER}
     steps:
       - name: checkout
         uses: actions/checkout@v1
@@ -32,7 +32,7 @@ jobs:
         with:
           context: node-app/
           push: true
-          tags: jjino/node-app:12
+          tags: jjino/node-app:$Ids
 
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -52,7 +52,7 @@ jobs:
 
       - name: docker image configuration
         run: |
-          TAG=12
+          TAG=${GITHUB_RUN_NUMBER}
           IMAGE=node-app:$TAG
           DOCKER_HUB=jjino
           sed -i 's/containerImageName/'"$DOCKER_HUB\/$IMAGE"'/g' kube-deployment/main.yml
